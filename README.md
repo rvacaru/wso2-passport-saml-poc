@@ -13,8 +13,6 @@ This node.js web app demonstrates:
 Create a Service Provider according to the following passport strategy:
 
 ```
-#!javascript
-
 var samlStrategy = new saml.Strategy({
   path: '/login/callback',    //http://localhost:3000/login/callback set in IS Service Provider
   entryPoint: 'https://localhost:9443/samlsso',
@@ -30,9 +28,7 @@ var samlStrategy = new saml.Strategy({
 
 Certificates for signing and signature validation have been extracted using the following:
 
-```
-#!javascript
-
+```text
 keytool -importkeystore -srckeystore wso2carbon.jks -destkeystore wso2carbon.p12 -deststoretype PKCS12 -srcalias wso2carbon -deststorepass wso2carbon -destkeypass wso2carbon
 openssl pkcs12 -in wso2carbon.p12  -nokeys -out openssl-certwso2.pem
 openssl pkcs12 -in wso2carbon.p12  -nodes -nocerts -out private-key.pem
@@ -46,7 +42,7 @@ openssl pkcs12 -in wso2carbon.p12  -nodes -nocerts -out private-key.pem
 
 ### Usage ###
 
-```
+```text
 npm install
 node app.js
 ```

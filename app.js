@@ -10,6 +10,10 @@ var passport = require('passport');
 var saml = require('passport-saml');
 var util = require('util');
 
+var users = require('./data/users');
+var userProfiles = users.userProfiles;
+var pwdDictionary = users.pwdDictionary;
+
 //Import Certificates from BWs - Not working because of bad wso2 certificate
 //require('ssl-root-cas/latest').inject();
 
@@ -18,8 +22,8 @@ var cliKey =    'QENlVc0dNGEl__Sy_HNKyJYUjNIa';
 var cliSecret = 'Pry8W2bIIuMjkfY4LEEYfaRL33Aa';
 
 //Certificates for signing and HTTPS
-var privateKey =  fs.readFileSync('./private-key.pem', 'utf8');
-var certificate = fs.readFileSync('./openssl-certwso2.pem', 'utf8');
+var privateKey =  fs.readFileSync('./certs/private-key.pem', 'utf8');
+var certificate = fs.readFileSync('./certs/openssl-certwso2.pem', 'utf8');
 //var httpsCredentials = {key: privateKey, cert: certificate};
 
 
@@ -29,28 +33,6 @@ var nodeProfile;
 var tokenObj;
 //Variable where the jwt sent by the Backend (not directly by Api Manager) will be stored as json object
 var jwt;
-
-var pwdDictionary = [];
-pwdDictionary.push({
-  key: 'r.vacaru',
-  value: 'xxxxx'
-});
-pwdDictionary.push({
-  key: 'm.rossi',
-  value: 'xxxxx'
-});
-
-var userProfiles = [];
-userProfiles.push({
-  username: 'r.vacaru',
-  systems: 'abs,demo',
-  roles: ['admin','operator','dev'],
-});
-userProfiles.push({
-  username: 'm.rossi',
-  systems: 'dev,super',
-  roles: ['admin','dev'],
-});
 
 passport.serializeUser(function(user, done) {
   done(null, user);
